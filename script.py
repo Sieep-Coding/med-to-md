@@ -21,12 +21,10 @@ def extract_title_and_content(html):
     soup = BeautifulSoup(html, 'html.parser')
     title_tag = soup.find("title")
     title = title_tag.text if title_tag else "Untitled"
-
     article_content = soup.find("article")
     if not article_content:
         print("Could not find content.")
         sys.exit(1)
-    
     return title, article_content
 
 def convert_to_markdown(html_content):
@@ -50,13 +48,10 @@ def main():
     url = sys.argv[1]
     print("Fetching...")
     html = fetch_medium_article(url)
-
     print("Extracting...")
     title, article_content = extract_title_and_content(html)
-
     print("Converting...")
     markdown_content = convert_to_markdown(article_content)
-
     print("Saving...")
     save_file(title, markdown_content)
 
