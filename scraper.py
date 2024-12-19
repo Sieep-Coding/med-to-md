@@ -1,5 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
+import sys
+import html2text
 
 class Scraper():
     def fetch_medium_article(url):
@@ -14,6 +16,12 @@ class Scraper():
         except requests.exceptions.RequestException as e:
             print(f"Error fetching article: {e}")
             sys.exit(1)
+
+    def convert_to_markdown(html_content):
+        markdown_converter = html2text.HTML2Text()
+        markdown_converter.ignore_links = False
+        markdown_converter.ignore_images = False
+        return markdown_converter.handle(str(html_content))
 
     def extract_title_and_content(html):
         """Extracts the title and content from Medium article HTML."""
