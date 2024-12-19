@@ -5,8 +5,8 @@ def main():
     
     aScraper = scraper.Scraper
     aUtil = utils.Utility
-    aUtil.arguments()
 
+    aUtil.arguments()
     url = sys.argv[1]
     print("Fetching...")
     html = aScraper.fetch_medium_article(url)
