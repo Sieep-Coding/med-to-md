@@ -4,7 +4,7 @@ A simple python script to convert medium articles to markdown.
 
 #### Why?
 
-To convert medium posts to my [new website.](https://nickstambaugh.vercel.app/)
+To convert medium posts to my [new website.](https://nickstambaugh.vercel.app/posts/)
 
 > [!WARNING]  
 > `utils.py` contains Linux specific commands.
