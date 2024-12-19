@@ -9,6 +9,7 @@ class TestUtilsMethods(unittest.TestCase):
     @patch('os.makedirs')
     @patch('os.path.exists')
     def test_run_bash(self, mock_exists, mock_makedirs, mock_run):
+        
         mock_exists.return_value = False
         mock_makedirs.return_value = None
         mock_run.return_value = MagicMock(returncode=0, stderr='', stdout="Success")
