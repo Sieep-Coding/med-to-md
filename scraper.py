@@ -16,13 +16,7 @@ class Scraper():
         except requests.exceptions.RequestException as e:
             print(f"Error fetching article: {e}")
             sys.exit(1)
-
-    def convert_to_markdown(html_content):
-        markdown_converter = html2text.HTML2Text()
-        markdown_converter.ignore_links = False
-        markdown_converter.ignore_images = False
-        return markdown_converter.handle(str(html_content))
-
+            
     def extract_title_and_content(html):
         """Extracts the title and content from Medium article HTML."""
         soup = BeautifulSoup(html, 'html.parser')
@@ -32,4 +26,11 @@ class Scraper():
         if not article_content:
             print("Could not find content.")
             sys.exit(1)
+
         return title, article_content
+    def convert_to_markdown(html_content):
+        """Uses html2text to convert html to markdown."""
+        markdown_converter = html2text.HTML2Text()
+        markdown_converter.ignore_links = False
+        markdown_converter.ignore_images = False
+        return markdown_converter.handle(str(html_content))
