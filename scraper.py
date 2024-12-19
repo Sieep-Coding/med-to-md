@@ -26,7 +26,7 @@ class Scraper():
         if not article_content:
             print("Could not find content.")
             sys.exit(1)
-
+            
         return title, article_content
     def convert_to_markdown(html_content):
         """Uses html2text to convert html to markdown."""
