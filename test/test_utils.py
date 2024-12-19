@@ -14,8 +14,12 @@ class TestUtilsMethods(unittest.TestCase):
         mock_run.return_value = MagicMock(returncode=0, stderr='', stdout="Success")
 
         filename = 'test.md'
-
         utils.Utility.run_bash(filename)
+        
+        output = "./output"
+        mock_exists.assert_called_with(output)
+        mock_makedirs.assert_called_once_with(output)
+        mock_run.assert_called_once_with(["mv", filename, output], capture_output=True, text=True)
 
 if __name__ == "__main__":
     unittest.main()
