@@ -16,3 +16,29 @@ def fetch_medium_article(url):
     except requests.exceptions.RequestException as e:
         print(f"Error fetching article: {e}")
         sys.exit(1)
+
+def extract_title_and_content(html):
+    """Extracts the title and content from Medium article HTML."""
+    soup = BeautifulSoup(html, 'html.parser')
+    title_tag = soup.find("title")
+    title = title_tag.text if title_tag else "Untitled"
+
+    article_content = soup.find("article")
+    if not article_content:
+        print("Could not find content.")
+        sys.exit(1)
+    
+    return title, article_content
+
+def convert_to_markdown(html_content):
+    mardown_converter = html2text.HTML2Text()
+    mardown_converter.ignore_links = False
+    mardown_converter.ignore_images = False
+    return mardown_converter.handle(str(html_content))
+
+def save_file(title, markdown_content):
+    safe_title = "".join(c for c in title if c.isalnum() or c in "-_").rstrip()
+    filename = f"{safe_title}.md"
+    with open(filename, "w", encoding="utf-8") as file:
+        file.write(markdown_content)
+    print(f"Article saved successfully")
