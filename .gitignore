@@ -1,5 +1,5 @@
 *.exe
 .vscode/
 makefile
-
+output/
 .venv/
