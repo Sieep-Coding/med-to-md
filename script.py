@@ -1,11 +1,7 @@
-import requests
-from bs4 import BeautifulSoup
 import html2text
 import sys
-import subprocess
-import os
 
-import scraper
+import scraper, utils
 
 def convert_to_markdown(html_content):
     markdown_converter = html2text.HTML2Text()
@@ -26,20 +22,6 @@ def save_file(title, markdown_content):
         print(f"Error saving file: {e}")
         return None
 
-def run_bash(filename):
-    """Moves the file to the 'test' folder in the project root."""
-    test_dir = "./output"
-    if not os.path.exists(test_dir):
-        os.makedirs(test_dir)
-    try:
-        result = subprocess.run(["mv", filename, test_dir], capture_output=True, text=True)
-        if result.returncode == 0:
-            print(f"Moved '{filename}' to '{test_dir}/'")
-        else:
-            print(f"Error moving file: {result.stderr}")
-    except Exception as e:
-        print(f"Error running bash command: {e}")
-
 def main():
     if len(sys.argv) != 2:
         print("Usage: python3 script.py <url to Medium article>")
@@ -55,7 +37,7 @@ def main():
     print("Saving...")
     file = save_file(title, markdown_content)
     print("Running bash...")
-    run_bash(file)
+    utils.Utility.run_bash(file)
 
 if __name__ == "__main__":
     main()
