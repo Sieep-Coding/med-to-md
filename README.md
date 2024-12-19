@@ -2,6 +2,10 @@
 
 A simple python script to convert medium articles to markdown via a `.md` file
 
+#### Why?
+
+To convert blog posts to my [new website.](https://nickstambaugh.vercel.app/)
+
 ## Usage
 
 Clone the repository.
