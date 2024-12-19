@@ -5,29 +5,7 @@ import sys
 import subprocess
 import os
 
-def fetch_medium_article(url):
-    """Fetches a medium article."""
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36"
-    }
-    try:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
-        return response.text
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching article: {e}")
-        sys.exit(1)
-
-def extract_title_and_content(html):
-    """Extracts the title and content from Medium article HTML."""
-    soup = BeautifulSoup(html, 'html.parser')
-    title_tag = soup.find("title")
-    title = title_tag.text if title_tag else "Untitled"
-    article_content = soup.find("article")
-    if not article_content:
-        print("Could not find content.")
-        sys.exit(1)
-    return title, article_content
+import scraper
 
 def convert_to_markdown(html_content):
     markdown_converter = html2text.HTML2Text()
@@ -69,9 +47,9 @@ def main():
     
     url = sys.argv[1]
     print("Fetching...")
-    html = fetch_medium_article(url)
+    html = scraper.Scraper.fetch_medium_article(url)
     print("Extracting...")
-    title, article_content = extract_title_and_content(html)
+    title, article_content = scraper.Scraper.extract_title_and_content(html)
     print("Converting...")
     markdown_content = convert_to_markdown(article_content)
     print("Saving...")

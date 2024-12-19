@@ -3,3 +3,5 @@
 makefile
 output/
 .venv/
+
+__pycache__/
