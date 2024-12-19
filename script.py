@@ -2,7 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 import html2text
 import sys
-import os
 
 def fetch_medium_article(url):
     """Fetches a medium article."""
